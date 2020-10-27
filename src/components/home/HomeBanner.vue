@@ -3,6 +3,7 @@
     <div class="bg-img" :style="{backgroundImage: bgImg}">
       <div class="title">{{title}}</div>
       <div class="sub-title">{{subTitle}}</div>
+      <div>121212</div>
     </div>
   </div>
 </template>
