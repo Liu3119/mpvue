@@ -75,14 +75,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
 .image-view {
   width: 100%;
-}
-.image {
-  width: 100%
-}
-.round {
-  border-radius: 50%;
+  .image {
+    width: 100%
+  }
+  .round {
+    border-radius: 50%;
+  }
 }
 </style>

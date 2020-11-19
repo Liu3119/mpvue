@@ -5,7 +5,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "小薰家烘焙",
+    "navigationBarTitleText": "小程序",
     "navigationBarTextStyle": "black"
   },
   "usingComponents": {
