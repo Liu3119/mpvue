@@ -1,39 +1,39 @@
-var path = require('path')
-var fs = require('fs')
-var utils = require('./utils')
-var config = require('../config')
-var webpack = require('webpack')
-var merge = require('webpack-merge')
-var vueLoaderConfig = require('./vue-loader.conf')
-var MpvuePlugin = require('webpack-mpvue-asset-plugin')
-var glob = require('glob')
-var CopyWebpackPlugin = require('copy-webpack-plugin')
-var relative = require('relative')
+var path = require( 'path' )
+var fs = require( 'fs' )
+var utils = require( './utils' )
+var config = require( '../config' )
+var webpack = require( 'webpack' )
+var merge = require( 'webpack-merge' )
+var vueLoaderConfig = require( './vue-loader.conf' )
+var MpvuePlugin = require( 'webpack-mpvue-asset-plugin' )
+var glob = require( 'glob' )
+var CopyWebpackPlugin = require( 'copy-webpack-plugin' )
+var relative = require( 'relative' )
 
-function resolve (dir) {
-  return path.join(__dirname, '..', dir)
+function resolve ( dir ) {
+  return path.join( __dirname, '..', dir )
 }
 
-function getEntry (rootSrc) {
+function getEntry ( rootSrc ) {
   var map = {};
-  glob.sync(rootSrc + '/pages/**/main.js')
-  .forEach(file => {
-    var key = relative(rootSrc, file).replace('.js', '');
-    map[key] = file;
-  })
-   return map;
+  glob.sync( rootSrc + '/pages/**/main.js' )
+    .forEach( file => {
+      var key = relative( rootSrc, file ).replace( '.js', '' );
+      map[ key ] = file;
+    } )
+  return map;
 }
 
-const appEntry = { app: resolve('./src/main.js') }
-const pagesEntry = getEntry(resolve('./src'), 'pages/**/main.js')
-const entry = Object.assign({}, appEntry, pagesEntry)
+const appEntry = { app: resolve( './src/main.js' ) }
+const pagesEntry = getEntry( resolve( './src' ), 'pages/**/main.js' )
+const entry = Object.assign( {}, appEntry, pagesEntry )
 
 let baseWebpackConfig = {
   // 如果要自定义生成的 dist 目录里面的文件路径，
   // 可以将 entry 写成 {'toPath': 'fromPath'} 的形式，
   // toPath 为相对于 dist 的路径, 例：index/demo，则生成的文件地址为 dist/index/demo.js
   entry,
-  target: require('mpvue-webpack-target'),
+  target: require( 'mpvue-webpack-target' ),
   output: {
     path: config.build.assetsRoot,
     jsonpFunction: 'webpackJsonpMpvue',
@@ -43,26 +43,26 @@ let baseWebpackConfig = {
       : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: [ '.js', '.vue', '.json' ],
     alias: {
       'vue': 'mpvue',
-      '@': resolve('src')
+      '@': resolve( 'src' )
     },
     symlinks: false,
-    aliasFields: ['mpvue', 'weapp', 'browser'],
-    mainFields: ['browser', 'module', 'main']
+    aliasFields: [ 'mpvue', 'weapp', 'browser' ],
+    mainFields: [ 'browser', 'module', 'main' ]
   },
   module: {
     rules: [
-      {
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        enforce: 'pre',
-        include: [resolve('src'), resolve('test')],
-        options: {
-          formatter: require('eslint-friendly-formatter')
-        }
-      },
+      // {
+      //   test: /\.(js|vue)$/,
+      //   loader: 'eslint-loader',
+      //   enforce: 'pre',
+      //   include: [ resolve( 'src' ), resolve( 'test' ) ],
+      //   options: {
+      //     formatter: require( 'eslint-friendly-formatter' )
+      //   }
+      // },
       {
         test: /\.vue$/,
         loader: 'mpvue-loader',
@@ -70,12 +70,12 @@ let baseWebpackConfig = {
       },
       {
         test: /\.js$/,
-        include: [resolve('src'), resolve('test')],
+        include: [ resolve( 'src' ), resolve( 'test' ) ],
         use: [
           'babel-loader',
           {
             loader: 'mpvue-loader',
-            options: Object.assign({checkMPEntry: true}, vueLoaderConfig)
+            options: Object.assign( { checkMPEntry: true }, vueLoaderConfig )
           },
         ]
       },
@@ -84,7 +84,7 @@ let baseWebpackConfig = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('img/[name].[ext]')
+          name: utils.assetsPath( 'img/[name].[ext]' )
         }
       },
       {
@@ -92,7 +92,7 @@ let baseWebpackConfig = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('media/[name].[ext]')
+          name: utils.assetsPath( 'media/[name].[ext]' )
         }
       },
       {
@@ -100,31 +100,31 @@ let baseWebpackConfig = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('fonts/[name].[ext]')
+          name: utils.assetsPath( 'fonts/[name].[ext]' )
         }
       }
     ]
   },
   plugins: [
     // api 统一桥协议方案
-    new webpack.DefinePlugin({
+    new webpack.DefinePlugin( {
       'mpvue': 'global.mpvue',
       'mpvuePlatform': 'global.mpvuePlatform'
-    }),
+    } ),
     new MpvuePlugin(),
-    new CopyWebpackPlugin([{
+    new CopyWebpackPlugin( [ {
       from: '**/*.json',
       to: ''
-    }], {
+    } ], {
       context: 'src/'
-    }),
-    new CopyWebpackPlugin([
+    } ),
+    new CopyWebpackPlugin( [
       {
-        from: path.resolve(__dirname, '../static'),
-        to: path.resolve(config.build.assetsRoot, './static'),
-        ignore: ['.*']
+        from: path.resolve( __dirname, '../static' ),
+        to: path.resolve( config.build.assetsRoot, './static' ),
+        ignore: [ '.*' ]
       }
-    ])
+    ] )
   ]
 }
 
@@ -137,26 +137,26 @@ const projectConfigMap = {
 }
 
 const PLATFORM = process.env.PLATFORM
-if (/^(swan)|(tt)$/.test(PLATFORM)) {
-  baseWebpackConfig = merge(baseWebpackConfig, {
+if ( /^(swan)|(tt)$/.test( PLATFORM ) ) {
+  baseWebpackConfig = merge( baseWebpackConfig, {
     plugins: [
-      new CopyWebpackPlugin([{
-        from: path.resolve(__dirname, projectConfigMap[PLATFORM]),
-        to: path.resolve(config.build.assetsRoot)
-      }])
+      new CopyWebpackPlugin( [ {
+        from: path.resolve( __dirname, projectConfigMap[ PLATFORM ] ),
+        to: path.resolve( config.build.assetsRoot )
+      } ] )
     ]
-  })
+  } )
 }
-if (/^wx$/.test(PLATFORM)) {
-  baseWebpackConfig = merge(baseWebpackConfig, {
+if ( /^wx$/.test( PLATFORM ) ) {
+  baseWebpackConfig = merge( baseWebpackConfig, {
     plugins: [
-      new CopyWebpackPlugin([{
-        from: resolve('node_modules/vant-weapp/dist'),
-        to: resolve('dist/wx/vant-weapp/dist'),
-        ignore: ['.*']
-      }])
+      new CopyWebpackPlugin( [ {
+        from: resolve( 'node_modules/vant-weapp/dist' ),
+        to: resolve( 'dist/wx/vant-weapp/dist' ),
+        ignore: [ '.*' ]
+      } ] )
     ]
-  })
+  } )
 }
 
 module.exports = baseWebpackConfig

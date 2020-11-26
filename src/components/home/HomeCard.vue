@@ -16,24 +16,23 @@
       <div class="book-info">
         <div class="book-wrapper">
           <div class="book-img-wrapper">
-            <image-view
-              src="https://www.youbaobao.xyz/book/res/img//EarthSciences/978-981-10-3713-9_CoverFigure.jpg"
-            />
+            <image-view src="https://www.youbaobao.xyz/book/res/img//EarthSciences/978-981-10-3713-9_CoverFigure.jpg" />
           </div>
           <div class="book-img-wrapper">
-          <image-view
-            src="https://www.youbaobao.xyz/book/res/img//EarthSciences/978-981-10-3713-9_CoverFigure.jpg"
-          />
+            <image-view src="https://www.youbaobao.xyz/book/res/img//EarthSciences/978-981-10-3713-9_CoverFigure.jpg" />
           </div>
           <div class="book-img-wrapper">
-            <image-view
-              src="https://www.youbaobao.xyz/book/res/img//EarthSciences/978-981-10-3713-9_CoverFigure.jpg"
-            />
+            <image-view src="https://www.youbaobao.xyz/book/res/img//EarthSciences/978-981-10-3713-9_CoverFigure.jpg" />
           </div>
         </div>
         <div class="shelf-wrapper">
           <div class="shelf">书架</div>
-          <van-icon class="arrow" name="arrow" size="11px" color="#828489"></van-icon>
+          <van-icon
+            class="arrow"
+            name="arrow"
+            size="11px"
+            color="#828489"
+          ></van-icon>
         </div>
       </div>
       <div class="feedback-wrapper">
@@ -90,7 +89,7 @@
 
 <style scoped>
 .home-card {
-  background-image: linear-gradient(-90deg, #54575F 0%, #595B60 100%);
+  background-image: linear-gradient(-90deg, #54575f 0%, #595b60 100%);
   border-radius: 15px;
   margin: 22px 20px 0;
 }
@@ -107,7 +106,8 @@
   width: 20px;
   height: 20px;
 }
-.nickname, .shelf-text {
+.nickname,
+.shelf-text {
   font-size: 12px;
   color: #fff;
 }
@@ -142,7 +142,7 @@
   font-size: 11px;
   word-break: break-word;
   color: #fff;
-  opacity: .8;
+  opacity: 0.8;
 }
 .book-img-wrapper {
   width: 70px;
