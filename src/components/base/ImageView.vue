@@ -52,8 +52,6 @@ export default {
       error: false
     }
   },
-  created () {
-  },
   methods: {
     onClick () {
       this.$emit('onClick')
@@ -69,7 +67,12 @@ export default {
   },
   watch: {
     src (n, o) {
-      console.log(n, o)
+      if (n && n.length && n !== o) {
+        this.$nextTick(() => {
+          this.isLoading = true
+          this.error = false
+        })
+      }
     }
   }
 }

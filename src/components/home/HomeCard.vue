@@ -3,26 +3,22 @@
     <div class="home-card-inner">
       <div class="user-info">
         <div class="avatar-wrapper">
-          <image-view
-            src="https://www.youbaobao.xyz/mpvue-res/logo.jpg"
-            round
-          />
+          <image-view :src="avatar" round />
         </div>
-        <div class="nickname">{{'米老鼠'}}</div>
-        <div class="shelf-text">书架共{{3}}本好书</div>
+        <div class="nickname">{{ nickName }}</div>
+        <div class="shelf-text">书架共{{ data.num }}本好书</div>
         <div class="round-item"></div>
         <div class="shelf-text">特别精选</div>
       </div>
       <div class="book-info">
         <div class="book-wrapper">
-          <div class="book-img-wrapper">
-            <image-view src="https://www.youbaobao.xyz/book/res/img//EarthSciences/978-981-10-3713-9_CoverFigure.jpg" />
-          </div>
-          <div class="book-img-wrapper">
-            <image-view src="https://www.youbaobao.xyz/book/res/img//EarthSciences/978-981-10-3713-9_CoverFigure.jpg" />
-          </div>
-          <div class="book-img-wrapper">
-            <image-view src="https://www.youbaobao.xyz/book/res/img//EarthSciences/978-981-10-3713-9_CoverFigure.jpg" />
+          <div
+            class="book-img-wrapper"
+            v-for="(item, index) of bookList"
+            :key="index"
+            @click="onBookClick"
+          >
+            <image-view :src="item.cover" />
           </div>
         </div>
         <div class="shelf-wrapper">
@@ -44,47 +40,58 @@
 </template>
 
 <script>
-  import ImageView from '../base/ImageView'
-  import Dialog from 'vant-weapp/dist/dialog/dialog'
-  export default {
-    name: 'homecard',
-    components: {
-      ImageView
+import ImageView from '../base/ImageView'
+import Dialog from 'vant-weapp/dist/dialog/dialog'
+export default {
+  name: 'homecard',
+  components: {
+    ImageView
+  },
+  props: {
+    data: Object,
+    hasSign: {
+      type: Boolean,
+      default: false
     },
-    props: {
-      data: Object,
-      hasSign: {
-        type: Boolean,
-        default: false
-      },
-      signDay: {
-        type: Number,
-        default: 0
-      }
+    signDay: {
+      type: Number,
+      default: 0
+    }
+  },
+  computed: {
+    avatar () {
+      return this.data && this.data.userInfo && this.data.userInfo.avatar
     },
-    data () {
-      return {}
+    nickName () {
+      return this.data && this.data.userInfo && this.data.userInfo.nickName
     },
-    created () {
-    },
-    methods: {
-      gotoShelf () {},
-      onBookClick () {},
-      sign () {},
-      onFeedBackClick () {
-        Dialog.confirm({
-          title: '反馈',
-          message: '您是否确认提交反馈信息',
-          confirmButtonText: '是',
-          cancelButtonText: '否'
-        }).then(() => {
-          console.log('点击是之后时间')
-        }).catch(() => {
-          console.log('点击否')
-        })
-      }
+    bookList () {
+      return (this.data && this.data.bookList) || []
+    }
+  },
+  data () {
+    return {}
+  },
+  created () {
+  },
+  methods: {
+    gotoShelf () { },
+    onBookClick () { },
+    sign () { },
+    onFeedBackClick () {
+      Dialog.confirm({
+        title: '反馈',
+        message: '您是否确认提交反馈信息',
+        confirmButtonText: '是',
+        cancelButtonText: '否'
+      }).then(() => {
+        console.log('点击是之后时间')
+      }).catch(() => {
+        console.log('点击否')
+      })
     }
   }
+}
 </script>
 
 <style scoped>

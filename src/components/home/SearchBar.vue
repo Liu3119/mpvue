@@ -13,8 +13,14 @@
         @input="onChange"
         confirm-type="search"
         @confirm="onConfirm"
+        placeholder-style="color: #adb4be; font-size: 15px"
       />
-      <van-icon v-if="searchWord.length" name="close" class="clear" @click="onClearClick" />
+      <van-icon
+        v-if="searchWord.length"
+        name="close"
+        class="clear"
+        @click="onClearClick"
+      />
     </div>
   </div>
 </template>
@@ -76,7 +82,7 @@ export default {
   align-items: center;
   height: 40px;
   padding: 12px 15px;
-  background: #F5F7F9;
+  background: #f5f7f9;
   border-radius: 20px;
   box-sizing: border-box;
 }
@@ -84,7 +90,8 @@ export default {
   flex-grow: 1;
   margin: 0 8px;
 }
-.search,.clear {
+.search,
+.clear {
   display: flex;
   align-items: center;
   font-size: 16px;

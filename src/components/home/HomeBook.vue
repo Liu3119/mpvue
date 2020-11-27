@@ -3,15 +3,15 @@
 		<div class="home-book-header">{{ title }}</div>
 		<div class="home-book-content">
 			<div class='home-book-row' v-for="(item, index) in bookData" :key="index">
-				<div class="home-book-col" 
-					v-for="(book, bookIndex) in item" 
+				<div class="home-book-col"
+					v-for="(book, bookIndex) in item"
 					:key="bookIndex"
 					:style="{flex: '0 0 ' + (100/col) + '%'}">
-					<div 
+					<div
 						class="book-wrapper"
-						:style="{flexDirection: mode === HOME_BOOK_MODE.COL ? 'cloume' : 'row'}"
+						:style="{flexDirection: mode === HOME_BOOK_MODE.COL ? 'column' : 'row'}"
 						@clikc='onBookClick'
-						v-if="mode === HOME_BOOK_MODE.COL.COL || mode === HOME_BOOK_MODE.COL.ROW"
+						v-if="mode === HOME_BOOK_MODE.COL || mode === HOME_BOOK_MODE.ROW"
 					>
 						<ImageView :src='book.cover'/>
 						<div class='book-title-wrapper book-title-col' v-if="mode === HOME_BOOK_MODE.COL">
@@ -24,7 +24,7 @@
 								<div class='book-title book-author'>{{book.categoryText}}</div>
 							</div>
 						</div>
-					</div>	
+					</div>
 					<div class='category-wrapper' v-else>
 						<div class='category-text'>{{book.text}}</div>
 						<div class='category-num'>{{book.num}}本书</div>
@@ -230,13 +230,6 @@
 	}
 </style>
 <style lang="scss">
-	.home-book-footer {
-		.home-book-btn {
-			width: 100%;
-			font-size: 14px;
-			color: #3696ef;
-		}
-	}
 	.category-img1 {
 		.image {
 			border-radius: 0 0 10px 0;
