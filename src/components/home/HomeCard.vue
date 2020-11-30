@@ -3,7 +3,7 @@
     <div class="home-card-inner">
       <div class="user-info">
         <div class="avatar-wrapper">
-          <image-view :src="avatar" round />
+          <image-view :src="avatar" height="100%" mode="scrollTopFill" round />
         </div>
         <div class="nickname">{{ nickName }}</div>
         <div class="shelf-text">书架共{{ data.num }}本好书</div>
@@ -60,7 +60,7 @@ export default {
   },
   computed: {
     avatar () {
-      return this.data && this.data.userInfo && this.data.userInfo.avatar
+      return this.data && this.data.userInfo && this.data.userInfo.avatarUrl
     },
     nickName () {
       return this.data && this.data.userInfo && this.data.userInfo.nickName

@@ -28,3 +28,6 @@ export const CATEGORY = {
   psychology: '心理学',
   statistics: '统计学'
 }
+
+export const APPID = "wx26de55f2f154420d"
+export const SECRET = "2eaacaf65a3e9f22e0120a626587ac7e"
