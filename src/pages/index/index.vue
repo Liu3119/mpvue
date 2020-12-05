@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="home" v-if="!isShowAuth">
-      <search-bar disabled @click="onSearchBarClick" :hot-search="hotSearch" />
+      <search-bar
+        disabled
+        @onClick="onSearchBarClick"
+        :hot-search="hotSearch"
+      />
       <home-card :data="homeCard" />
       <home-banner
         :img="banner.img"
@@ -100,7 +104,7 @@ export default {
     }
   },
   created () {
-    this.getSetting()
+    this.init()
   },
   methods: {
     recommendClick (key) {
@@ -162,7 +166,10 @@ export default {
     },
     onCategoryClick () { },
     onSearchBarClick () {
-      // 跳转搜索页
+      this.$router.push({
+        path: '/pages/search/main',
+        query: { hotSearch: this.hotSearch }
+      })
     },
     onBannerClick (url) {
       console.log('点击Banner', url)

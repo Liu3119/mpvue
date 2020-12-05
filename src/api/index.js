@@ -34,3 +34,11 @@ export function userRegister (openId, userInfo) {
     ...userInfo
   })
 }
+
+export const search = (params) => {
+  return get(`${URL}book/search`, params)
+}
+
+export const hotSearch = () => {
+  return get(`${URL}book/hot-search`)
+}

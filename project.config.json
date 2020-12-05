@@ -3,9 +3,9 @@
   "setting": {
     "urlCheck": false,
     "es6": true,
-    "enhance": false,
+    "enhance": true,
     "postcss": true,
-    "preloadBackgroundData": true,
+    "preloadBackgroundData": false,
     "minified": true,
     "newFeature": true,
     "coverView": true,
@@ -30,6 +30,7 @@
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
+    "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
     "minifyWXSS": true

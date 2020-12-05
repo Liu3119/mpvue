@@ -1,6 +1,6 @@
 <template>
   <div class="search-bar">
-    <div class="search-bar-content">
+    <div class="search-bar-content" @click="onSearchBarClick">
       <van-icon name="search" class="search" />
       <input
         v-model="searchWord"
@@ -15,12 +15,7 @@
         @confirm="onConfirm"
         placeholder-style="color: #adb4be; font-size: 15px"
       />
-      <van-icon
-        v-if="searchWord.length"
-        name="close"
-        class="clear"
-        @click="onClearClick"
-      />
+      <van-icon v-if="searchWord.length" name="close" class="clear" @click="onClearClick" />
     </div>
   </div>
 </template>
@@ -44,7 +39,7 @@ export default {
     hotSearch: {
       type: String,
       default: ''
-    }
+    },
   },
   data () {
     return {
@@ -68,6 +63,12 @@ export default {
     onConfirm (e) {
       const { value } = e.mp.detail
       this.$emit('onConfirm', value)
+    },
+    setValue (v) {
+      this.searchWord = v
+    },
+    getValue () {
+      return this.searchWord
     }
   }
 }
@@ -89,6 +90,8 @@ export default {
 .search-bar .search-bar-content .search-input {
   flex-grow: 1;
   margin: 0 8px;
+  color: #333;
+  font-size: 15px;
 }
 .search,
 .clear {
